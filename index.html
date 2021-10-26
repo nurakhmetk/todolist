@@ -26,6 +26,7 @@
                             <button id="button" type="button" class="todo__button">Add</button>
                         </form>
                         <ul id="ul-list" class="todo__ul ul-style">
+
                         </ul>
                     </div>
                 </div>
@@ -39,7 +40,7 @@
         } else {
             document.getElementById("ul-list").innerHTML += 
             `
-            <li class="task">${document.getElementById("input").value}
+            <li id="odnaLi" class="task">${document.getElementById("input").value}
                 <button class="delete">
                     <i class="far fa-trash-alt"></i>
                 </button>
@@ -49,21 +50,21 @@
             var current_tasks = document.querySelectorAll(".delete");
 
             for(var i = 0; i < current_tasks.length; i++) {
-                current_tasks[i].onclick = function() {
+                current_tasks[i].onclick = function deleting() {
                     this.parentNode.remove();
                 }
             }
 
-            var tasks = document.querySelector("ul");
+            var list = document.querySelectorAll(".todo__ul");
 
-            tasks.addEventListener("click", function(event) {
-                if(event.target.tagName === "LI") {
+
+            var li = document.getElementById("odnaLi");
+
+            for(let i = 0; i < list.length; i++) {
+                list[i].onclick = function(event) {
                     event.target.classList.toggle('completed');
                 }
-            }, false
-            
-            );
-
+            }
             document.getElementById("input").value = "";
         }
     }
